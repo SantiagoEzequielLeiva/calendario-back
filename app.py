@@ -8,14 +8,21 @@ app = Flask(__name__)
 # DEFINICION DE CORS
 CORS(app)
 
+materia_service = MateriaService()
+
 '''
 INICIO - Endpoints Materias
 '''
 
 
 @app.route("/materias", methods=["GET"])
-def listarMaterias():
-    return MateriaService.obtenerMaterias()
+def listar_materias():
+    return materia_service.obtener_materias()
+
+
+@app.route("/materias/<int:materia>", methods=["GET"])
+def obtener_materia(materia):
+    return materia_service.obtener_materia_por_id(materia)
 
 
 '''

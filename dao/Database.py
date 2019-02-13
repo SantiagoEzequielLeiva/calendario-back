@@ -11,7 +11,7 @@ class Database(object):
 
         self.connection = None
 
-    def abrirConexion(self):
+    def abrir_conexion(self):
         self.connection = pymysql.connect(
             host=self.host,
             user=self.user,
@@ -20,14 +20,14 @@ class Database(object):
             cursorclass=pymysql.cursors.DictCursor
         )
 
-    def cerrarConexion(self):
+    def cerrar_conexion(self):
         self.connection.close()
 
-    def obtenerConexion(self):
-        if self.conexionNulaOCerrada():
-            self.abrirConexion()
+    def obtener_conexion(self):
+        if self.conexion_nula_o_cerrada():
+            self.abrir_conexion()
 
         return self.connection
 
-    def conexionNulaOCerrada(self):
+    def conexion_nula_o_cerrada(self):
         return self.connection is None or (self.connection is not None and not self.connection.open)
