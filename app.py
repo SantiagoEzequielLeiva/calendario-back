@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask
 from flask_cors import CORS
 
@@ -17,12 +19,18 @@ INICIO - Endpoints Materias
 
 @app.route("/materias", methods=["GET"])
 def listar_materias():
-    return materia_service.obtener_materias()
+    logging.info("INICIO GET - /materias")
+    response = materia_service.obtener_materias()
+    logging.info("FIN GET - /materias")
+    return response
 
 
 @app.route("/materias/<int:materia>", methods=["GET"])
 def obtener_materia(materia):
-    return materia_service.obtener_materia_por_id(materia)
+    logging.info("INICIO GET - /materias/%d", materia)
+    response = materia_service.obtener_materia_por_id(materia)
+    logging.info("FIN GET - /materias/%d", materia)
+    return response
 
 
 '''
@@ -30,8 +38,5 @@ FIN - Endpoints Materias
 '''
 
 if __name__ == '__main__':
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=True
-    )
+    logging.basicConfig(format='%(asctime)s [%(levelname)s] --- %(module)s: %(message)s', level=logging.INFO)
+    app.run(host='0.0.0.0', port=5000, debug=True)
