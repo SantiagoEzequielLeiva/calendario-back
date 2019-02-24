@@ -10,8 +10,6 @@ app = Flask(__name__)
 # DEFINICION DE CORS
 CORS(app)
 
-materia_service = MateriaService()
-
 '''
 INICIO - Endpoints Materias
 '''
@@ -20,7 +18,7 @@ INICIO - Endpoints Materias
 @app.route("/materias", methods=["GET"])
 def listar_materias():
     logging.info("INICIO GET - /materias")
-    response = materia_service.obtener_materias()
+    response = MateriaService.obtener_materias()
     logging.info("FIN GET - /materias")
     return response
 
@@ -28,7 +26,7 @@ def listar_materias():
 @app.route("/materias/<int:materia>", methods=["GET"])
 def obtener_materia(materia):
     logging.info("INICIO GET - /materias/%d", materia)
-    response = materia_service.obtener_materia_por_id(materia)
+    response = MateriaService.obtener_materia_por_id(materia)
     logging.info("FIN GET - /materias/%d", materia)
     return response
 
